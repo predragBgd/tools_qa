@@ -13,4 +13,7 @@ module.exports = class ElementsPage extends AllPages {
   async goToTextBoxPage() {
     await this.#driver.findElement(By.xpath(`//li[@id="item-0"]`)).click();
   }
+  async goToRadioButtonPage() {
+    await this.#driver.findElement(By.id("item-2")).click();
+  }
 };

@@ -7,21 +7,21 @@ const { assert, expect } = require("chai");
 const HomePage = require("../pages/home.page");
 const ElementsPage = require("../pages/elements.page");
 const TextBoxPage = require("../pages/textBox.page");
-const CheckBoxPage = require("../pages/checkBox.page");
+const RadioButtonPage = require("../pages/radioButon.page");
 
 describe("shop.QA.rs tests", function () {
   let driver;
   let homePage;
   let elementsPage;
   let textBoxPage;
-  let checkBoxPage;
+  let radioButtonPage;
 
   before(() => {
     driver = new webdriver.Builder().forBrowser("chrome").build();
     homePage = new HomePage(driver);
     elementsPage = new ElementsPage(driver);
     textBoxPage = new TextBoxPage(driver);
-    checkBoxPage = new CheckBoxPage(driver);
+    radioButtonPage = new RadioButtonPage(driver);
   });
 
   after(async () => {
@@ -43,5 +43,13 @@ describe("shop.QA.rs tests", function () {
     await textBoxPage.getSubmitBtn();
     // expect(await textBoxPage.getOutputName()).to.eq("Name:Blagoje Mitić");
     expect(await textBoxPage.getOutputName()).to.be.true;
+  });
+  it("Click Radio Button", async () => {
+    await elementsPage.goToRadioButtonPage();
+    expect(await radioButtonPage.getPageMainTitle()).to.eq("Radio Button");
+    await radioButtonPage.clickImpressiveBtn();
+    expect(await radioButtonPage.getSelectedAnswer()).to.eq(
+      "You have selected Impressive"
+    );
   });
 });
